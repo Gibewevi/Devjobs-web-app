@@ -1,17 +1,16 @@
 import Devjob from "./Devjob";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function BodyDevjobs()
 {
-    useEffect(()=>{
-    
-    })
     // API data
     const [data, setData] = useState([]);
+    // API is loaded
     const [loaded, setLoaded] = useState(false);
 
     const setDataAPI = async (API) => 
     {   
+        // One load 
         if(loaded==false)
         {
             fetch(API)
@@ -22,7 +21,7 @@ export default function BodyDevjobs()
     }
 
    setDataAPI('./assets/data.json');
-   
+   // DATA devjob -> HTML
    const listDevjobs = data.map((devjob)=>
     <Devjob
     id = {devjob.id}
@@ -39,7 +38,7 @@ export default function BodyDevjobs()
 
 
     return(
-    <div className="grid grid-cols-1 gap-y-12 mt-[160px]">
+    <div className="grid grid-cols-1 gap-y-12 mt-[160px] md:grid-cols-2 md:gap-x-3 xl:grid-cols-3">
         {listDevjobs}
     </div>
     )

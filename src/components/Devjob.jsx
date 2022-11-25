@@ -1,5 +1,6 @@
 export default function Devjob(props)
 {
+    //hsl color API
     let color = props.logoBackground;
   
 return(

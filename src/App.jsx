@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div className="App">
-      <div className='bg-white min-w-[375px]'>
+      <div>
           <Header />
           <div className='min-w-[375px] flex justify-center items-center mx-auto'>
              <BodyDevjobs />
