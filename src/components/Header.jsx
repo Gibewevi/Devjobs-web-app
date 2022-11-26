@@ -3,7 +3,7 @@ import ButtonDarkMode from "./ButtonDarkMode";
 export default function Header()
 {
     return(
-        <header className="w-full min-w-[375px] h-[136px] bg-header-mobile mx-auto flex flex-col justify-center items-center relative">
+        <header className="w-full min-w-[375px] h-[136px] bg-center bg-header-mobile bg-cover mx-auto flex flex-col justify-center items-center relative">
             <div className="w-full flex flex-row justify-between items-center p-6">
                 {/* title */}
                 <h1 className="text-[32px] font-bold text-white">devjobs</h1>
