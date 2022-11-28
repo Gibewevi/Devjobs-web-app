@@ -1,0 +1,23 @@
+#circle {
+  width: 14px;
+  height: 14px;
+  background-color: #5964E0;
+  transition: all 0.3s ease-in-out;
+}
+
+input[type=checkbox] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+}
+
+#searchPurple {
+  fill: red;
+}
+
+@media (min-width: 768px) {
+  .headerBackground {
+    border-bottom-left-radius: 100px 90px;
+  }
+}/*# sourceMappingURL=index.css.map */

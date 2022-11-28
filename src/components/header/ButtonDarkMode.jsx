@@ -1,12 +1,15 @@
-import { Component, ReactDOM, useEffect, useState } from "react";
+import { Component, ReactDOM, useEffect, useState, useContext } from "react";
 import { createPortal } from "react-dom";
+import { ThemeContext } from "../context/ThemeContextProvider";
 
 export default function ButtonDarkMode() 
 {
     const [on, setOn] = useState(false);
-   
+    const {theme, toggleTheme} = useContext(ThemeContext);
+    
     const textclick = () => {
-        if(on)
+        toggleTheme();
+        if(theme)
         {
             let circle = document.getElementById('circle');
             circle.style.transform='translateX(0px)';

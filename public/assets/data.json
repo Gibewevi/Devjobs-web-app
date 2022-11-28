@@ -478,5 +478,37 @@
         "Proactively solve the problems most important to the business"
       ]
     }
+  },
+  {
+    "id": 16,
+    "company": "Apple",
+    "logo": "./assets/logos/apple.png",
+    "logoBackground": "hsl(0, 2%, 96%)",
+    "position": "Software Engineer ",
+    "postedAt": "1mo ago",
+    "contract": "Full Time",
+    "location": "United States",
+    "website": "https://www.apple.com/fr/legal/intellectual-property/guidelinesfor3rdparties.html",
+    "apply": "https://www.apple.com/fr/legal/intellectual-property/guidelinesfor3rdparties.html",
+    "description": "Imagine a dynamic and exciting environment where teams of people are dedicated to groundbreaking innovative technologies that accelerate solutions for one of the most valuable companies in the world.",
+    "requirements": {
+      "content": "You will be responsible for writing and debugging your code while writing your own unit tests. We are looking for self-motivated developers who are interested in learning and can quickly pick up new technologies. We’re a relatively small team in a stable yet fast growing company and would love for you to join us.",
+      "items": [
+        "Expertise in Java, Relational and NoSQL Databases, object oriented analysis and design",
+        "Experience in engineering highly scalable, mission critical, reliable and distributed systems.",
+        "Experience in application and implementation of Machine Learning solutions and data pipelines",
+        "Experience in configuring, performance monitoring & tuning of middleware"
+      ]
+    },
+    "role": {
+      "content": " You are an excellent engineer with good understanding of various distributed system concepts, and you'll work with partners, Project managers, and cross-discipline teams.",
+      "items": [
+        "Help define our software engineering culture",
+        "Write high quality software for the frontend",
+        "Do code reviews",
+        "Proactively solve the problems most important to the business"
+      ]
+    }
   }
+
 ]

@@ -1,3 +1,4 @@
+
 #circle
 {
 width: 14px;
@@ -7,7 +8,6 @@ transition: all 0.3s ease-in-out;
 }
 input[type="checkbox"]
 {
-background-color: #E8E8EA;
 -webkit-appearance: none;
 -moz-appearance: none;
 -o-appearance: none;
@@ -16,4 +16,9 @@ appearance:none;
 #searchPurple
 {
     fill: red;
+}
+@media (min-width: 768px){
+    .headerBackground {
+    border-bottom-left-radius: 100px 90px;
+    }
 }

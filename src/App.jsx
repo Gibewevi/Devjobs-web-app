@@ -1,25 +1,24 @@
-import { useState } from 'react'
-import { MyContext } from './components/MyContext'
-import Header from './components/Header'
-import Devjob from './components/Devjob'
-import BodyDevjobs from './components/BodyDevjobs'
+import { useState, useContext } from 'react'
+import ThemeContextProvider from './components/context/ThemeContextProvider'
+import DataContextProvider from './components/context/JobAPIContextProvider'
+import Header from './components/header/Header'
+import Job from './components/Job'
+import ContainerAllJob from './components/ContainerAllJob'
 import './App.css'
 
 function App() {
- const test = {
-  name:'joanny'
-};
+
+  
+
   return (               
-    <MyContext.Provider name={test}>
-    <div className="App">
-        <div>
+      <ThemeContextProvider>
+        <DataContextProvider>
             <Header />
             <div className='min-w-[375px] flex justify-center items-center mx-auto'>
-              <BodyDevjobs />
+              <ContainerAllJob />
             </div>
-        </div>
-    </div>
-    </MyContext.Provider>             
+        </DataContextProvider>
+      </ThemeContextProvider> 
   )
 }
 
