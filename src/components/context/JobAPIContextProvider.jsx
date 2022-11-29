@@ -1,19 +1,23 @@
 import React, { createContext, useState } from "react";
 import { createPortal } from "react-dom";
-
+let data = [];
 export const JobAPIContext = createContext();
 
 const JobAPIContextProvider = (props) => {
 
     const fetchAPI = (StringfileName)=> 
     {
-        fetch(StringfileName)
-        .then((response) => response.json())
-        .then((API) => SetjobToBeSorted([... API]));
+        if(!isFetch)
+        {
+            fetch(StringfileName).then(function(response) {
+                response.json().then(function(API) {    
+                    SetjobToBeSorted(API);setIsFetch(true)});
+            });
+        }
     }
 
-
 // Jobs API à afficher
+const [isFetch, setIsFetch] = useState(false);
 const [jobToDisplay, setJobToDisplay] = useState([]);
 const [jobToBeSorted, SetjobToBeSorted] = useState(fetchAPI('./assets/data.json'));
 
@@ -38,11 +42,11 @@ const sortJobsBySearch = () =>
     let find = false;
   
     jobToBeSorted.forEach(element => {
-        console.log(element);
+        // console.log(element);
     });
 
 }
-console.log(jobToBeSorted)
+console.log('job'+jobToBeSorted)
 
 // const verifyDataByInput = (val_data, val_title, array_dataTemp) => 
 //     {
