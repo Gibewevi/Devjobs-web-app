@@ -1,6 +1,4 @@
 import React, { createContext, useState } from "react";
-import { createPortal } from "react-dom";
-let data = [];
 export const JobAPIContext = createContext();
 
 const JobAPIContextProvider = (props) => {
@@ -21,84 +19,153 @@ const [isFetch, setIsFetch] = useState(false);
 const [jobToDisplay, setJobToDisplay] = useState([]);
 const [jobToBeSorted, SetjobToBeSorted] = useState(fetchAPI('./assets/data.json'));
 
-const getSearchInputValue = ()=> 
+let jobsInputValues = 
 {
-    let inputTitleJob = document.getElementById('inputTitleJob');
-    let inputLocationJob = document.getElementById('inputTitleJob');
-    let fullTimeChecked = document.getElementById('fullTimeChecked');
+    nameJobs : null,
+    location : null,
+    fullTime : false,
 }
 
-const isIncludesToJobAPI = (inputSearchValue) => 
-{
-
-}
-
-const sortJobsBySearch = () => 
-{
-    // J'actualise les données des inputs dans des variables
-    let inputTitleJob = document.getElementById('inputTitleJob');
-    let inputLocationJob = document.getElementById('inputTitleJob');
-    let fullTimeChecked = document.getElementById('fullTimeChecked');
-    let find = false;
-  
-    jobToBeSorted.forEach(element => {
-        // console.log(element);
-    });
-
-}
-console.log('job'+jobToBeSorted)
-
-// const verifyDataByInput = (val_data, val_title, array_dataTemp) => 
-//     {
-//         let data_position = val_data.position.toLocaleLowerCase().split(' ');
-//         let input_position = val_title.toLocaleLowerCase().split(' ');
-//         let find = false;
-
-//         data_position.forEach(position => {
-//             if(!find)
-//             {
-//                 find = input_position.includes(position);
-//             } 
-//         });
-
-//         if(find)
-//         {
-//         array_dataTemp.push(val_data);
-//         }
-//     }
-
-//     const sortData = (val_title, val_location) => 
-//     {
-//         // array en local
-//         let dataTemp = []; 
-
-//         dataSort.forEach(data => {
-//         // la localisation existe
-//         if(data.location == val_location)
-//         {
-//             if(val_title!='')
-//             {verifyDataByInput(data, val_title, dataTemp);} 
-
-//             else {dataTemp.push(data);}
-//         } 
-        
-//         else if(val_location==='' && val_title != '' )
-//         {verifyDataByInput(data, val_title, dataTemp);}
-
-//         else if(val_location==='' && val_title ==='')
-//         {dataTemp = dataSort;}
-
-//         else if(val_location==='' && val_title !='')
-//         {verifyDataByInput(data, val_title, dataTemp);}
-//         });
-
-//        setData(dataTemp)
-//     }
+// parcourir les données de l'API
+    //-> Si le champ FullTime est renseigné
+        //{
+            //-> retourne les jobs en fonction des valeurs inputs Fulltime
+                //> vérifie les données inputs renseignés et retourne les jobs
+        //}
+    //-> Si le champ FullTime n'est pas renseigné
+            //-> retourne les jobs en fonction des valeurs inputs FullTime
+                //> vérifie les données inputs renseignés et retourne les jobs
 
 
 
+    const sortListJobByName = (listJob) => 
+    {
+        let nameJobs = jobsInputValues.nameJobs.toLowerCase().split(' ');
+        let findJobsInListJob = false;
+        let listJobByName = [];
+
+        listJob.forEach(job => {
+            let jobSplitCaseToLower = job.position.toLowerCase().split(' ');
+
+            nameJobs.forEach(nameJob => {
+                if(jobSplitCaseToLower.includes(nameJob) && !findJobsInListJob)
+                {
+                    listJobByName.push(job);
+                    findJobsInListJob = true;
+                }
+            });
+        });
+        return listJobByName;
+    }            
+    const sortListJobByLocation = () => 
+    {
+        let InputLocationToLowerCase = jobsInputValues.location.toLowerCase();
+        let listJobByLocation = [];
+        jobToBeSorted.forEach((element) => {
+           if(element.location.toLowerCase().includes(InputLocationToLowerCase))
+           {
+                listJobByLocation.push(element);
+           }
+        });
+        return listJobByLocation;
+    }
+    const locationIsEmpty = () => 
+    {
+        if(jobsInputValues.location != null) {return false}
+        else {return true}
+    }
+    const fullTimeIsChecked = () => 
+    {
+        return jobsInputValues.fullTime;
+    }
+    const nameJobsIsEmpty = () => 
+    {
+        if(jobsInputValues.nameJobs != null){return false} 
+        else{return true}
+    }
+
+    const sortListByFullTimeJobs = () => 
+    {
+        return jobToBeSorted.filter(job => job.contract === 'Full Time');
+    }
+
+    const sortListByPartTimeJobs = () => 
+    {
+        return jobToBeSorted.filter(job => job.contract != 'Full Time');
+    }
+
+    const sortListJobByInputToDisplay = () => 
+    {
+        let listJobs; 
+        // si fulltime 
+        if(fullTimeIsChecked())
+        {
+            listJobs = sortListByFullTimeJobs();
+            // si location est renseigné
+            if(!locationIsEmpty())
+            {
+                listJobs = sortListJobByLocation();
+                // si name est vide
+                if(nameJobsIsEmpty())
+                {
+                    console.log(listJobs);
+                    return listJobs;
+                }
+                // si name est renseigné
+                else if(!nameJobsIsEmpty())
+                {
+
+                    listJobs = sortListJobByName(listJobs);
+                    console.log(listJobs);
+                    return listJobs;
+                }
+            } else if(locationIsEmpty())
+            {
+                if(nameJobsIsEmpty())
+                {
+                    console.log(listJobs);
+                    return listJobs;
+                }
+                // si name est renseigné
+                else if(!nameJobsIsEmpty())
+                {
+
+                    listJobs = sortListJobByName(listJobs);
+                    console.log(listJobs);
+                    return listJobs;
+                }
+            }
+        }
+
+        else if(!fullTimeIsChecked())
+        {
+                listJobs = sortListByPartTimeJobs();  
+                console.log(listJobs);
+            if(!locationIsEmpty())
+            {
+                listJobs = sortListJobByLocation();
+                console.log(listJobs);
+                if(nameJobsIsEmpty)
+                {
+                console.log(listJobs);
+                return listJobs;
+                }
+                else if(!nameJobsIsEmpty())
+                {
+                    listJobs = sortListJobByName(listJobs);
+                    console.log(listJobs);
+                    return listJobs;
+                }
+            }
+            else 
+            {
+                listJobs = jobToBeSorted;
+            }
+        }
+    }
+    
 return(
-        <JobAPIContext.Provider value = {{jobToDisplay}}>
+        <JobAPIContext.Provider value = {{jobToDisplay, jobsInputValues, sortListJobByInputToDisplay}}>
             {props.children}
         </JobAPIContext.Provider>
     )
