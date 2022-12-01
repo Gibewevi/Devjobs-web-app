@@ -16,7 +16,7 @@ const JobAPIContextProvider = (props) => {
 
 // Jobs API à afficher
 const [isFetch, setIsFetch] = useState(false);
-const [jobToDisplay, setJobToDisplay] = useState([]);
+const [jobToDisplay, setJobToDisplay] = useState(fetchAPI('./assets/data.json'));
 const [jobToBeSorted, SetjobToBeSorted] = useState(fetchAPI('./assets/data.json'));
 
 let jobsInputValues = 
@@ -26,20 +26,10 @@ let jobsInputValues =
     fullTime : false,
 }
 
-// parcourir les données de l'API
-    //-> Si le champ FullTime est renseigné
-        //{
-            //-> retourne les jobs en fonction des valeurs inputs Fulltime
-                //> vérifie les données inputs renseignés et retourne les jobs
-        //}
-    //-> Si le champ FullTime n'est pas renseigné
-            //-> retourne les jobs en fonction des valeurs inputs FullTime
-                //> vérifie les données inputs renseignés et retourne les jobs
-
-
 
     const sortListJobByName = (listJob) => 
     {
+
         let nameJobs = jobsInputValues.nameJobs.toLowerCase().split(' ');
         let findJobsInListJob = false;
         let listJobByName = [];
@@ -51,17 +41,21 @@ let jobsInputValues =
                 if(jobSplitCaseToLower.includes(nameJob) && !findJobsInListJob)
                 {
                     listJobByName.push(job);
+                    console.log('--------- DEBUG ---------');
+                    console.log('nameJob '+nameJob);
+                    console.log('jobSplitCaseToLower.includes(nameJob) '+jobSplitCaseToLower);
                     findJobsInListJob = true;
                 }
             });
+            findJobsInListJob = false;
         });
         return listJobByName;
     }            
-    const sortListJobByLocation = () => 
+    const sortListJobByLocation = (listJobs) => 
     {
         let InputLocationToLowerCase = jobsInputValues.location.toLowerCase();
         let listJobByLocation = [];
-        jobToBeSorted.forEach((element) => {
+        listJobs.forEach((element) => {
            if(element.location.toLowerCase().includes(InputLocationToLowerCase))
            {
                 listJobByLocation.push(element);
@@ -89,77 +83,58 @@ let jobsInputValues =
         return jobToBeSorted.filter(job => job.contract === 'Full Time');
     }
 
-    const sortListByPartTimeJobs = () => 
+    const sortListByAllTimeJobs = () => 
     {
-        return jobToBeSorted.filter(job => job.contract != 'Full Time');
+        return jobToBeSorted;
     }
 
     const sortListJobByInputToDisplay = () => 
     {
         let listJobs; 
-        // si fulltime 
         if(fullTimeIsChecked())
         {
             listJobs = sortListByFullTimeJobs();
-            // si location est renseigné
             if(!locationIsEmpty())
             {
-                listJobs = sortListJobByLocation();
-                // si name est vide
+                listJobs = sortListJobByLocation(listJobs);
                 if(nameJobsIsEmpty())
                 {
-                    console.log(listJobs);
-                    return listJobs;
+                    setJobToDisplay(listJobs);
                 }
-                // si name est renseigné
                 else if(!nameJobsIsEmpty())
                 {
-
-                    listJobs = sortListJobByName(listJobs);
-                    console.log(listJobs);
-                    return listJobs;
+                    setJobToDisplay(listJobs);
                 }
             } else if(locationIsEmpty())
             {
                 if(nameJobsIsEmpty())
                 {
-                    console.log(listJobs);
-                    return listJobs;
+                    setJobToDisplay(listJobs);
                 }
-                // si name est renseigné
                 else if(!nameJobsIsEmpty())
                 {
 
                     listJobs = sortListJobByName(listJobs);
-                    console.log(listJobs);
-                    return listJobs;
+                    setJobToDisplay(listJobs);
                 }
             }
         }
 
         else if(!fullTimeIsChecked())
         {
-                listJobs = sortListByPartTimeJobs();  
-                console.log(listJobs);
+                listJobs = sortListByAllTimeJobs();  
             if(!locationIsEmpty())
             {
-                listJobs = sortListJobByLocation();
-                console.log(listJobs);
-                if(nameJobsIsEmpty)
+                listJobs = sortListJobByLocation(listJobs);
+                if(nameJobsIsEmpty())
                 {
-                console.log(listJobs);
-                return listJobs;
+                setJobToDisplay(listJobs);
                 }
                 else if(!nameJobsIsEmpty())
                 {
                     listJobs = sortListJobByName(listJobs);
-                    console.log(listJobs);
-                    return listJobs;
+                    setJobToDisplay(listJobs);
                 }
-            }
-            else 
-            {
-                listJobs = jobToBeSorted;
             }
         }
     }

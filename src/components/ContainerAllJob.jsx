@@ -1,25 +1,27 @@
 import Job from "./Job";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { JobAPIContext } from "./context/JobAPIContextProvider";
 
 export default function ContainerAllJob()
 {
-   const {jobToDisplay} = useContext(JobAPIContext);
- 
 
-    const listJobs = jobToDisplay.map((Job)=>
-     <Job
-     id = {Job.id}
-     logo = { Job.logo }
-     logoBackground= { Job.logoBackground }
-     company= { Job.company }
-     position= { Job.position } 
-     postedAt= { Job.postedAt }
-     location= { Job.location }
-     />
+    const {jobToDisplay} = useContext(JobAPIContext);
+    useEffect(()=>{
+    console.log(jobToDisplay);
+    },[jobToDisplay]);
+     
+    let listJobs = jobToDisplay.map((Job)=>
+        <Job
+        id = {Job.id}
+        logo = { Job.logo }
+        logoBackground= { Job.logoBackground }
+        company= { Job.company }
+        position= { Job.position } 
+        postedAt= { Job.postedAt }
+        location= { Job.location }
+        />
     );
 
-   
 
 
     return(
