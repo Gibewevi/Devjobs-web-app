@@ -1,8 +1,8 @@
 import { useState, useContext } from 'react'
 import ThemeContextProvider from './components/context/ThemeContextProvider'
-import DataContextProvider from './components/context/JobAPIContextProvider'
+import JobAPIContextProvider from './components/context/JobAPIContextProvider'
 import Header from './components/header/Header'
-import Job from './components/Job'
+import PopFilterSearch from './components/PopFilterSearch'
 import ContainerAllJob from './components/ContainerAllJob'
 import './App.css'
 
@@ -12,12 +12,13 @@ function App() {
 
   return (               
       <ThemeContextProvider>
-        <DataContextProvider>
+        <JobAPIContextProvider>
+          <PopFilterSearch />
             <Header />
-            <div className='min-w-[375px] flex justify-center items-center mx-auto'>
+            <div className='min-w-[375px] h-[full-136px] flex justify-center items-center mx-auto'>
               <ContainerAllJob />
             </div>
-        </DataContextProvider>
+        </JobAPIContextProvider>
       </ThemeContextProvider> 
   )
 }

@@ -7,25 +7,26 @@ export default function ContainerAllJob()
 
     const {jobToDisplay} = useContext(JobAPIContext);
     useEffect(()=>{
-    console.log(jobToDisplay);
+    // console.log(jobToDisplay);
     },[jobToDisplay]);
-     
-    let listJobs = jobToDisplay.map((Job)=>
-        <Job
-        id = {Job.id}
-        logo = { Job.logo }
-        logoBackground= { Job.logoBackground }
-        company= { Job.company }
-        position= { Job.position } 
-        postedAt= { Job.postedAt }
-        location= { Job.location }
+
+    let listJobs = jobToDisplay?.map((job,id) => 
+        <Job key={id}
+        id = {job.id}
+        logo = { job.logo }
+        logoBackground= { job.logoBackground }
+        company= { job.company }
+        position= { job.position } 
+        postedAt= { job.postedAt }
+        location= { job.location }
         />
     );
 
 
 
+
     return(
-    <div className="grid grid-cols-1 gap-y-12 mt-[160px] md:grid-cols-2 md:gap-x-3 xl:grid-cols-3">
+    <div className="h-[full-136px] grid grid-cols-1 gap-y-12 mt-[160px] md:grid-cols-2 md:gap-x-3 xl:grid-cols-3">
         {listJobs}
     </div>
     )

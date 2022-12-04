@@ -5,7 +5,6 @@ export default function Job(props)
 {
     //hsl color API
     let color = props.logoBackground;
-
     const {theme, background} = useContext(ThemeContext);
 
 return(
