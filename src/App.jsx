@@ -1,23 +1,23 @@
-import { useState, useContext } from 'react'
+import { useState } from 'react'
 import ThemeContextProvider from './components/context/ThemeContextProvider'
 import JobAPIContextProvider from './components/context/JobAPIContextProvider'
 import Header from './components/header/Header'
+import LockBackground from './components/LockBackground'
 import PopFilterSearch from './components/PopFilterSearch'
-import ContainerAllJob from './components/ContainerAllJob'
+import JobsContainer from './components/JobsContainer'
 import './App.css'
 
 function App() {
 
-  
+
 
   return (               
       <ThemeContextProvider>
         <JobAPIContextProvider>
-          <PopFilterSearch />
+          <PopFilterSearch enableScrolling/>
+          <LockBackground />
             <Header />
-            <div className='min-w-[375px] h-[full-136px] flex justify-center items-center mx-auto'>
-              <ContainerAllJob />
-            </div>
+            <JobsContainer />
         </JobAPIContextProvider>
       </ThemeContextProvider> 
   )

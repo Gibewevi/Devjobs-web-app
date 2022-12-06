@@ -18,11 +18,14 @@ input[type=checkbox] {
   }
 }/*# sourceMappingURL=index.css.map */
 
-.lockLayout{
+#opacityByLock{
   background-image: 
-  /* top, transparent red */
   linear-gradient(
     rgba(0, 0, 0, 0.70), 
     rgba(0, 0, 0, 0.70)
   )
+}
+.stop-scrolling{
+height: 100%;
+overflow: hidden;
 }

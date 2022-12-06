@@ -16,9 +16,8 @@ export default function Header()
            = useContext(ThemeContext);
 
     const {
-        jobToDisplay,
-        sortListJobByInputToDisplay,
         jobsInputValues,
+        jobPage
         }
          = useContext(JobAPIContext);
     
@@ -35,10 +34,10 @@ export default function Header()
     {
         jobsInputValues.fullTime = event.target.checked;
     }
-    
+
     return(
         <header className="headerBackground w-full min-w-[375px] h-[136px] bg-header-mobile bg-center bg-cover mx-auto flex flex-col justify-center items-center relative">
-            <div className="w-full flex flex-row justify-between items-center p-6">
+            <div className="w-full flex flex-row justify-between items-center p-6 ">
                 {/* title */}
                 <h1 className="devjobTitle text-[32px] font-bold text-white">DEVJOB</h1>
 
@@ -50,7 +49,7 @@ export default function Header()
                 </div>
             </div>
 
-            <div className={`${theme ? background.dark.veryDarkBlue : background.light.white} absolute bottom-0 rounded-lg translate-y-[50%] w-[327px] h-[80px] p-4 shadow-md flex flex-row justify-between items-center md:w-[689px]`}>
+            <div className={`${theme ? background.dark.veryDarkBlue : background.light.white} ${jobPage==0 ? 'block' : 'hidden'} absolute bottom-0 rounded-lg translate-y-[50%] w-[327px] h-[80px] p-4 shadow-md flex flex-row justify-between items-center md:w-[689px]`}>
                 <InputFilterByTitle />
                 <InputFilterByLocation />
                 <InputFullTime />

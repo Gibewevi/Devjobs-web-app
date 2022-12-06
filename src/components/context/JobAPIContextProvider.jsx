@@ -19,18 +19,28 @@ const JobAPIContextProvider = (props) => {
   const [MobileFilter, setMobileFilter] = useState(false);
   const [jobToBeSorted, SetjobToBeSorted] = useState(fetchAPI('./assets/data.json'));
 
+  const [jobPage, setJobPage] = useState(0);
+  const [jobByID, setJobByID] = useState();
+
+  const loadJobByIDOnClick = (job) => {
+    setJobByID(job);
+  }
+
+  const changePageByJobClick = () => {
+    setJobPage(1);
+  } 
+
+  const clickOnThumbnailJob = (job) => {
+    loadJobByIDOnClick(job);
+    changePageByJobClick(1);
+  }
+
   const setPopMobileFilter = () => {
-    console.log("function")
-    console.log(MobileFilter)
     if(MobileFilter){
       setMobileFilter(false);
-      console.log("is true")
-      console.log(MobileFilter)
       return;
     }
     setMobileFilter(true);
-    console.log("is false")
-    console.log(MobileFilter)
   }
 
 
@@ -151,8 +161,18 @@ const JobAPIContextProvider = (props) => {
     let locationJobInput = document.getElementById('locationJobInput').value = null;
   }
   return (
-    <JobAPIContext.Provider value={{ jobToDisplay, jobsInputValues, sortListJobByInputToDisplay, setPopMobileFilter, MobileFilter }}>
-     {props.children}
+    <JobAPIContext.Provider value={{ jobToDisplay,
+     jobsInputValues,
+      sortListJobByInputToDisplay,
+      setPopMobileFilter,
+      MobileFilter,
+      loadJobByIDOnClick,
+      clickOnThumbnailJob,
+      jobPage,
+      jobByID }}>
+
+      {props.children}
+
     </JobAPIContext.Provider>
   )
 }

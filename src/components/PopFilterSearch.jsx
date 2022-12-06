@@ -2,6 +2,7 @@ import { useContext } from "react";
 import InputFilterByLocation from "./input/InputFilterByLocation";
 import { JobAPIContext } from "./context/JobAPIContextProvider";
 import { ThemeContext } from "./context/ThemeContextProvider";
+import { useState } from "react";
 
 export default function PopFilterSearch(){
 
@@ -11,6 +12,10 @@ export default function PopFilterSearch(){
     MobileFilter,setPopMobileFilter
     }
      = useContext(JobAPIContext);
+
+    const {
+    enableScrolling }
+    = useContext(ThemeContext);
 
   const getInputLocationJob = (event) => 
   {
@@ -23,12 +28,13 @@ export default function PopFilterSearch(){
 
   const buttonMobileSearchonClick = () => {
     sortListJobByInputToDisplay();
-    setPopMobileFilter();
+    setPopMobileFilter();   
+    enableScrolling();
   }
 
   if (MobileFilter) {
       return(
-          <div className="z-20 w-[327px] h-[217px] rounded-lg border border-1 border-slate-200 bg-white shadow-lg absolute left-0 right-0 ml-auto mr-auto top-[250px] flex flex-col justify-center items-center md:invisible">
+          <div className="z-40 w-[327px] h-[217px] rounded-lg border border-1 border-slate-200 bg-white shadow-lg absolute left-0 right-0 ml-auto mr-auto top-[250px] flex flex-col justify-center items-center md:invisible">
             <div className="flex flex-row w-full p-4">
               <img src='.\public\assets\desktop\icon-location.svg' className="mr-4"></img>
               <input type='text' onChange={getInputLocationJob} id='InputMobileFilter' name='InputMobileFilter' placeholder="Filter by location..." className=""></input>
