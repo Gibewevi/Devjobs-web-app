@@ -29,3 +29,10 @@ input[type=checkbox] {
 height: 100%;
 overflow: hidden;
 }
+
+#ThumbnailJob{
+transition: all 0.25s ease-out;
+}
+#ThumbnailJob:hover {
+  transform: translateY(-25px);
+}

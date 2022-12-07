@@ -17,7 +17,7 @@ export default function Job(props)
         = useContext(JobAPIContext);
 
 return(
-    <div onClick={() => clickOnThumbnailJob(props)} className={`${theme ? background.dark.veryDarkBlue : background.light.white} min-w-[327px] w-[339px] h-[253px] flex flex-col justify-between shadow-xl rounded-lg p-8 relative`}>
+    <div onClick={() => clickOnThumbnailJob(props)} id='ThumbnailJob' className={`${theme ? background.dark.veryDarkBlue : background.light.white} min-w-[327px] w-[339px] h-[253px] flex flex-col justify-between shadow-xl rounded-lg p-8 relative`}>
         {/* Header icon */}
         <div style={{backgroundColor:color}} className="w-[50px] h-[50px] flex justify-center items-center rounded-2xl absolute top-0 -translate-y-[50%]">
             <img src={props.logo} className='w-[25px]'/>

@@ -1,4 +1,5 @@
 import React, { createContext, useState } from "react";
+import { useEffect } from "react";
 // 1
 export const ThemeContext = createContext();
 
@@ -6,6 +7,18 @@ const ThemeContextProvider = (props) =>
 {
     const [theme, setTheme] = useState(false)
     const [scrolling, setEnableScrolling] = useState(false);
+
+    useEffect(()=>{
+      setBackgroundBodyColor();
+    })
+
+    const setBackgroundBodyColor = () => {
+        if(theme){
+          document.body.style.background = "#121721";
+          return;
+        } 
+          document.body.style.background = "#FFFFFF";
+    }
 
     const background = 
     {

@@ -12,11 +12,9 @@ useEffect(()=>{
     const colorDarkMode = () => {
         if(theme){
             setColor(props.colorDark);
-            console.log(props.colorLight)
             return;
         }
         setColor(props.colorLight);
-        console.log(props.colorDark)
         return;
     }
 

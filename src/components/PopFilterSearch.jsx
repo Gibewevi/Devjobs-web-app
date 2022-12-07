@@ -19,11 +19,12 @@ export default function PopFilterSearch(){
 
   const getInputLocationJob = (event) => 
   {
-      jobsInputValues.location = event.target.value;
+     return jobsInputValues.location = event.target.value;
   }
 
   const isInputFullTimeChecked = (event) => {
-    jobsInputValues.fullTime = event.target.checked;
+    console.log(event.target.checked)
+    return jobsInputValues.fullTime = event.target.checked;
   }
 
   const buttonMobileSearchonClick = () => {

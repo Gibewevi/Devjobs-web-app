@@ -1,14 +1,17 @@
 import React, { createContext, useState } from "react";
+import { useEffect } from "react";
 export const JobAPIContext = createContext();
 
 const JobAPIContextProvider = (props) => {
 
   const fetchAPI = (StringfileName) => {
     if (!isFetch) {
-      fetch(StringfileName).then(function (response) {
-        response.json().then(function (API) {
-          SetjobToBeSorted(API); setIsFetch(true)
-        });
+      fetch(StringfileName)
+        .then(async response => {
+          const API = await response.json();
+  
+          SetjobToBeSorted(API);
+          setIsFetch(true);
       });
     }
   }
@@ -21,6 +24,14 @@ const JobAPIContextProvider = (props) => {
 
   const [jobPage, setJobPage] = useState(0);
   const [jobByID, setJobByID] = useState();
+
+  let jobsInputValues =
+  {
+    nameJobs: null,
+    location: null,
+    fullTime: false,
+  }
+
 
   const loadJobByIDOnClick = (job) => {
     setJobByID(job);
@@ -36,66 +47,22 @@ const JobAPIContextProvider = (props) => {
   }
 
   const setPopMobileFilter = () => {
-    if(MobileFilter){
-      setMobileFilter(false);
-      return;
-    }
-    setMobileFilter(true);
-  }
+    setMobileFilter(MobileFilter ? false : true);
+  };
 
-
-  let jobsInputValues =
-  {
-    nameJobs: null,
-    location: null,
-    fullTime: false,
-  }
 
   const sortListJobByInputToDisplay = () => {
-    let listJobs;
+    let listJobs = fullTimeIsChecked() ? sortListByFullTimeJobs() : sortListByAllTimeJobs();
 
-    if (fullTimeIsChecked()) {
-      listJobs = sortListByFullTimeJobs();
-      if (!locationIsEmpty()) {
-        listJobs = sortListJobByLocation(listJobs);
-        if (nameJobsIsEmpty()) {
-          setJobToDisplay(listJobs);
-        }
-        else if (!nameJobsIsEmpty()) {
-          setJobToDisplay(listJobs);
-        }
-      } else if (locationIsEmpty()) {
-        if (nameJobsIsEmpty()) {
-          setJobToDisplay(listJobs);
-        }
-        else if (!nameJobsIsEmpty()) {
-          listJobs = sortListJobByName(listJobs);
-          setJobToDisplay(listJobs);
-        }
-      }
+    if (!locationIsEmpty()) {
+      listJobs = sortListJobByLocation(listJobs);
     }
-
-    else if (!fullTimeIsChecked()) {
-      listJobs = sortListByAllTimeJobs();
-      if (!locationIsEmpty()) {
-        listJobs = sortListJobByLocation(listJobs);
-        if (nameJobsIsEmpty()) {
-          setJobToDisplay(listJobs);
-        }
-        else if (!nameJobsIsEmpty()) {
-          listJobs = sortListJobByName(listJobs);
-          setJobToDisplay(listJobs);
-        }
-      } else if (locationIsEmpty()) {
-        if (nameJobsIsEmpty()) {
-          setJobToDisplay(listJobs);
-        }
-        else if (!nameJobsIsEmpty()) {
-          listJobs = sortListJobByName(listJobs);
-          setJobToDisplay(listJobs);
-        }
-      }
+  
+    if (!nameJobsIsEmpty()) {
+      listJobs = sortListJobByName(listJobs);
     }
+  
+    setJobToDisplay(listJobs);
     resetJobsInputValues();
   }
 
@@ -110,27 +77,21 @@ const JobAPIContextProvider = (props) => {
     return jobToBeSorted.filter(job => job.contract === 'Full Time');
   }
   const locationIsEmpty = () => {
-    if (jobsInputValues.location != null) { return false }
-    else { return true }
+    return !Boolean(jobsInputValues.location);
   }
+
   const sortListJobByLocation = (listJobs) => {
     let InputLocationToLowerCase = jobsInputValues.location.toLowerCase();
-    let listJobByLocation = [];
-    listJobs.forEach((element) => {
-      if (element.location.toLowerCase().includes(InputLocationToLowerCase)) {
-        listJobByLocation.push(element);
-      }
+    let listJobByLocation = listJobs.filter((job) => {
+      return job.location.toLowerCase().includes(InputLocationToLowerCase);
     });
     return listJobByLocation;
   }
+  
   const nameJobsIsEmpty = () => {
-    if (jobsInputValues.nameJobs != null) {
-      return false
-    }
-    else {
-      return true
-    }
+    return !Boolean(jobsInputValues.nameJobs);
   }
+
   const sortListJobByName = (listJob) => {
 
     let nameJobs = jobsInputValues.nameJobs.toLowerCase().split(' ');
@@ -151,15 +112,15 @@ const JobAPIContextProvider = (props) => {
     });
     return listJobByName;
   }
+
   const resetJobsInputValues = () => {
-    jobsInputValues =
-    {
-      nameJobs: null,
-      location: null,
-    }
-    let nameJobInput = document.getElementById('nameJobInput').value = null;
-    let locationJobInput = document.getElementById('locationJobInput').value = null;
+    jobsInputValues.nameJobs = null;
+    jobsInputValues.location = null;
+    document.getElementById('nameJobInput').value = null;
+    document.getElementById('locationJobInput').value = null;
+    document.getElementById('fullTimeJobsChecked').checked = false;
   }
+
   return (
     <JobAPIContext.Provider value={{ jobToDisplay,
      jobsInputValues,

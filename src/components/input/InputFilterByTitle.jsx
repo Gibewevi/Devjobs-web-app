@@ -17,7 +17,7 @@ export default function InputFilterByLocation(){
       = useContext(JobAPIContext);
 
 const getInputNameJob = (event) => {
-    jobsInputValues.nameJobs = event.target.value;
+    return jobsInputValues.nameJobs = event.target.value;
     }
 
 const LockBackgroundAndSortListByInput = () => {
