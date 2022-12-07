@@ -16,6 +16,8 @@ const ThemeContextProvider = (props) =>
         dark: {
             veryDarkBlue : 'bg-[#19202D] ',
             midnight : 'bg-[#121721] ',
+            darkGrey : 'bg-[#6E8098]',
+            gray : 'bg-[#9DAEC2]'
         }
     }
 

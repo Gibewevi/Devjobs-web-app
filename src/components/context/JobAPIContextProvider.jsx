@@ -26,8 +26,8 @@ const JobAPIContextProvider = (props) => {
     setJobByID(job);
   }
 
-  const changePageByJobClick = () => {
-    setJobPage(1);
+  const changePageByJobClick = (val) => {
+    setJobPage(val);
   } 
 
   const clickOnThumbnailJob = (job) => {
@@ -169,7 +169,8 @@ const JobAPIContextProvider = (props) => {
       loadJobByIDOnClick,
       clickOnThumbnailJob,
       jobPage,
-      jobByID }}>
+      jobByID,
+      changePageByJobClick }}>
 
       {props.children}
 

@@ -27,7 +27,7 @@ export default function JobsList()
     );
 
     return(
-        <div className="grid grid-cols-1 gap-y-12 md:grid-cols-2 md:gap-x-3 xl:grid-cols-3 pt-[120px]">
+        <div className="grid grid-cols-1 gap-y-12 md:grid-cols-2 md:gap-x-3 xl:grid-cols-3 pt-[130px]">
             {listJobs}
         </div>
     )

@@ -37,7 +37,7 @@ export default function JobsContainer()
     );
 
     return(
-        <div className='min-w-[375px] h-[100%] flex justify-center items-center mx-auto mt-[100px]'>
+        <div className='min-w-[375px] h-[100%] flex justify-center items-center mx-auto'>
           {renderSwitchByJobComponent(jobPage)}
         </div>
     )
